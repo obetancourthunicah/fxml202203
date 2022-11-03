@@ -16,7 +16,10 @@ import javafx.collections.FXCollections;
 
 import com.pmp.fxpmp202203.dao.CitaTallerDao;
 import com.pmp.fxpmp202203.dao.CitaTaller;
+import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -102,6 +105,14 @@ public class ListaController implements Initializable {
     @FXML
     private void on_create_click(ActionEvent event) {
         System.out.println("Create");
+        try {
+            FXMLLoader modal = App.getFXMLLoader("formulario");
+            Parent modalbject = modal.load();
+            FormularioController formulario = (FormularioController) modal.getController();
+            App.loadFXMLModal(modalbject);
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     @FXML
