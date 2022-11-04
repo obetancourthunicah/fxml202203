@@ -102,32 +102,43 @@ public class ListaController implements Initializable {
         }
     }
 
-    @FXML
-    private void on_create_click(ActionEvent event) {
-        System.out.println("Create");
+    private void loadFormulario(String mode, CitaTaller selectedCita) {
         try {
             FXMLLoader modal = App.getFXMLLoader("formulario");
             Parent modalbject = modal.load();
             FormularioController formulario = (FormularioController) modal.getController();
+            //setear la Cita
+            formulario.setCita(selectedCita);
+            formulario.setCitasDao(dao);
+            formulario.setMode(mode);
+            //setear el modo
             App.loadFXMLModal(modalbject);
+            if (formulario.getMustReload()){
+                citas = dao.obtenerCitas();
+            }
         } catch (IOException ex) {
             System.err.println(ex);
         }
     }
+    
+    @FXML
+    private void on_create_click(ActionEvent event) {
+        loadFormulario("INS", new CitaTaller());
+    }
 
     @FXML
     private void on_read_click(ActionEvent event) {
-        System.out.println("Read");
+        loadFormulario("DSP", selectedCita);
     }
 
     @FXML
     private void on_update_click(ActionEvent event) {
-        System.out.println("Update");
+        loadFormulario("UPD", selectedCita);
     }
 
     @FXML
     private void on_delete_click(ActionEvent event) {
-        System.out.println("Delete");
+       loadFormulario("DEL", selectedCita);
     }
     
 }
