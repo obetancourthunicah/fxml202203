@@ -88,10 +88,10 @@ public class ListaController implements Initializable {
         }
     }
 
-    @FXML
-    private void on_table_row_selected(KeyEvent event) {
+    //@FXML
+    //private void on_table_row_selected(KeyEvent event) {
         //setSelectedRow();
-    }
+    //}
     
     private void setSelectedRow(){
         selectedCita = (CitaTaller) tableCitas.getSelectionModel().getSelectedItem();
